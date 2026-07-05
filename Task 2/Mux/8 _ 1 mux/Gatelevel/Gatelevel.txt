@@ -1,0 +1,38 @@
+module mux_41(input I0,I1,I2,I3,en,input [1:0] sel, output y);
+ 
+  wire w1,w2,w3,w4,w5,w6;
+  not(w1,sel[1]);
+  not(w2,sel[0]);
+  and(w3,w1,w2,I0,en);
+  and(w4,w1,sel[0],I1,en);
+  and(w5,sel[1],w2,I2,en);
+  and(w6,sel[1],sel[0],I3,en);
+  or(y,w3,w4,w5,w6);
+        endmodule
+
+
+module mux8_1(input I0,I1,I2,I3,I4,I5,I6,I7, input [2:0] sel, output reg Y);
+  wire y1,y2;
+  mux_41 m1(
+    .I0(I0),
+    .I1(I1),
+    .I2(I2),
+    .I3(I3),
+    .en(~sel[2]),
+    .sel(sel[1:0]),
+    .y(y1)
+  );
+   mux_41 m2(
+     .I0(I4),
+     .I1(I5),
+     .I2(I6),
+     .I3(I7),
+     .en(sel[2]),
+    .sel(sel[1:0]),
+     .y(y2)
+  );
+  or(Y,y1,y2);
+endmodule
+ 
+
+

@@ -1,0 +1,37 @@
+module mux_41(input I0,I1,I2,I3,en,input [1:0] sel, output reg y);
+  always @(*) begin
+    if(en==0)
+      y=0;
+    else
+      case(sel)
+        2'b00 :y=I0;
+        2'b01 :y=I1;
+        2'b10 :y=I2;
+        2'b11 :y=I3;
+        default:y=0;
+      endcase
+  end
+endmodule
+module mux8_1(input I0,I1,I2,I3,I4,I5,I6,I7, input [2:0] sel, output reg Y);
+  wire y1,y2;
+  mux_41 m1(
+    .I0(I0),
+    .I1(I1),
+    .I2(I2),
+    .I3(I3),
+    .en(~sel[2]),
+    .sel(sel[1:0]),
+    .y(y1)
+  );
+   mux_41 m2(
+     .I0(I4),
+     .I1(I5),
+     .I2(I6),
+     .I3(I7),
+     .en(sel[2]),
+    .sel(sel[1:0]),
+     .y(y2)
+  );
+  or(Y,y1,y2);
+endmodule
+
