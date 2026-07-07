@@ -1,0 +1,18 @@
+module grey_ttb;
+  reg [7:0] A;
+  wire [7:0] B;
+
+  grey dut(
+    A,
+    B);
+  initial begin
+    $monitor("A = %b Grey code = %b",A,B);
+    A=8'b10110000;
+    #10 A=8'b01001111;
+    #10 A=8'b01101011;
+    #10 A=8'b11001001;
+    #10 A=8'b11001101;
+    #10 $finish;
+  end
+endmodule
+  

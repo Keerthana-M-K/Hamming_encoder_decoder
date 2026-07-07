@@ -1,0 +1,21 @@
+module prior_encoder_ttb;
+  reg [7:0] Y ;
+  wire [2:0] A;
+  prior_encoder dut(
+    .Y(Y),
+    .A(A));
+  
+  initial  begin
+    $monitor("Input Y= %b Output A2 = %b A1 = %b A0 = %b",Y,A[2],A[1],A[0]);
+  Y=8'b00000001;
+  #10 Y=8'b00000011;
+  #10 Y=8'b00000111;
+  #10 Y=8'b00001111;
+  #10 Y=8'b00010110;
+  #10 Y=8'b00101110;
+  #10 Y=8'b01011110;
+  #10 Y=8'b10111110;
+  #10 Y=8'b00000000;
+  #10  $finish;
+  end
+endmodule        

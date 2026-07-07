@@ -1,0 +1,18 @@
+module decoder_ttb;
+  reg [2:0] D ;
+  wire [7:0] A; 
+  decoder dut(D,A);
+ 
+  initial  begin
+    $monitor("Input D= %b Output A7 = %b A6 = %b A5 = %b A4 = %b A3 = %b A2 = %b A1 = %b A0 = %b",D,A[7],A[6],A[5],A[4],A[3],A[2],A[1],A[0]);
+  D=3'b000;
+  #10 D=3'B001;
+  #10 D=3'B010;
+  #10 D=3'B011;
+  #10 D=3'B100;
+  #10 D=3'B101;
+  #10 D=3'B110;
+  #10 D=3'B111;
+  #10  $finish;
+  end
+endmodule    
